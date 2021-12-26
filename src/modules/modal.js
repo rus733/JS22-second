@@ -1,7 +1,6 @@
 const modal = () => {
   const modal = document.querySelector('.popup');
   const buttons = document.querySelectorAll('.popup-btn');
-  const body = document.querySelector('body');
   const closeBtn = modal.querySelector('.popup-close');
 
   buttons.forEach((btn) => {
