@@ -15,13 +15,19 @@ const menu = () => {
   };
 
   //кнопка меню
-  menuBtn.addEventListener('click', handleMenu());
+  menuBtn.addEventListener('click', handleMenu);
   //кнопка закрытия меню
-  closeBtn.addEventListener('click', handleMenu());
-  //перебор ссылок меню и закрытие меню
+  closeBtn.addEventListener('click', handleMenu);
+  //перебор
+  /*
   for (let i = 0; i < menuItems.length; i++) {
-    menuItems[i].addEventListener('click', handleMenu());
+    menuItems[i].addEventListener('click', handleMenu);
   }
+  */
+
+  menuItems.forEach((menuItem) => {
+    menuItems[i].addEventListener('click', handleMenu);
+  });
 };
 
 export default menu;
