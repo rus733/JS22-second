@@ -1,6 +1,6 @@
 'use strict';
 
 import timer from './modules/timer';
-import two from './modules/two';
+import menu from './modules/menu';
 timer('31 december 2021');
-two();
+menu();
