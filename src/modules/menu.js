@@ -22,7 +22,7 @@ const menu = () => {
     item.addEventListener('click', (e) => {
       e.preventDefault();
       const blockId = item.getAttribute('href');
-      document.querySelector('' + blockId).scrollIntoView({
+      document.querySelector(blockId).scrollIntoView({
         behavior: 'smooth',
         block: 'start',
       });
