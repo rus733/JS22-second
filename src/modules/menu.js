@@ -26,7 +26,7 @@ const menu = () => {
   */
 
   menuItems.forEach((menuItem) => {
-    menuItems[i].addEventListener('click', handleMenu);
+    menuItem.addEventListener('click', handleMenu);
   });
 };
 
