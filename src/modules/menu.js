@@ -5,11 +5,6 @@ const menu = () => {
   const menuItem = menu.querySelectorAll('ul>li>a[href*="#"]');
   const mainBlock = document.querySelector('main');
   const mainLink = mainBlock.querySelector('a[href*="#"]');
-  // ф  закрытия меню
-  const handleMenu = () => {
-    menu.classList.toggle('active-menu');
-  };
-
   const scrollScreen = (element) => {
     const blockId = element.getAttribute('href');
     document.querySelector('' + blockId).scrollIntoView({
@@ -17,17 +12,16 @@ const menu = () => {
       block: 'start',
     });
   };
+  // ф  закрытия меню
+  const handleMenu = () => {
+    menu.classList.toggle('active-menu');
+  };
 
   //перебор элементов меню бургер
   menuItem.forEach((item) => {
     item.addEventListener('click', (e) => {
       e.preventDefault();
       scrollScreen(item);
-      //const blockId = item.getAttribute('href');
-      //document.querySelector(blockId).scrollIntoView({
-      //behavior: 'smooth',
-      // block: 'start',
-      //});
       handleMenu();
     });
   });
@@ -40,11 +34,6 @@ const menu = () => {
   mainLink.addEventListener('click', (e) => {
     e.preventDefault();
     scrollScreen(mainLink);
-    //const blockId = mainLink.getAttribute('href');
-    //document.querySelector('' + blockId).scrollIntoView({
-    //behavior: 'smooth',
-    //block: 'start',
-    //});
   });
 };
 
