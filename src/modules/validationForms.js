@@ -6,7 +6,7 @@ const validationForms = () => {
   const inputEmail = document.querySelectorAll('.form-email');
 
   const inputNameBottom = document.querySelector('#form2-name');
-  const inputMessageBottom = document.querySelector('#form2-message');
+  const inputMessageBottom = document.querySelector('#form2-message';
 
   const customTrim = (val) =>
     val
@@ -19,20 +19,6 @@ const validationForms = () => {
       .replace(/@+/g, '@') //много @ в один
       .replace(/\.+/g, '.'); //много ... в один
 
-  /*
-  function customTrim(val) {
-    val = val.replace(/\s+/g, ' '); //много пробелов в один
-    val = val.replace(/-+/g, '-'); //много дефисов в один
-    val = val.replace(/\(+/g, '('); //много скобок в один
-    val = val.replace(/\)+/g, ')'); //много скобок в один
-    val = val.replace(/^[ |\-+]/g, ''); //удаление дефисов и пробелов в начале
-    val = val.replace(/[ |\-+]$/g, ''); //удаление дефисов и пробелов в конце
-    val = val.replace(/@+/g, '@'); //много @ в один
-    val = val.replace(/\.+/g, '.'); //много ... в один
-
-    return val;
-  }
-  */
   // валидация input-ов калькулятора
   inputsCalc.forEach((input) => {
     input.addEventListener('input', () => {
