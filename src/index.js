@@ -3,8 +3,8 @@
 import timer from './modules/timer';
 import menu from './modules/menu';
 import modal from './modules/modal';
-import regExp from './modules/regex';
+import validationForms from './modules/validationForms';
 timer('31 december 2021');
 menu();
 modal();
-regExp();
+validationForms();
