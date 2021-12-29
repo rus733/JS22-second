@@ -1,27 +1,10 @@
 const validationForms = () => {
   const inputsCalc = document.querySelectorAll('.calc-item');
-
   const inputName = document.querySelectorAll('.form-name');
   const inputPhone = document.querySelectorAll('.form-phone');
   const inputEmail = document.querySelectorAll('.form-email');
-
   const inputNameBottom = document.querySelector('#form2-name');
   const inputMessageBottom = document.querySelector('#form2-message');
-
-  //const customTrim = (val) => val.replace(/([ \-()@_.!~*'])(?=[ \-()@_.!~*']*\1)/g, '');
-
-  /*
-    val
-      .replace(/\s+/g, ' ') //много пробелов в один
-      .replace(/-+/g, '-') //много дефисов в один
-      .replace(/\(+/g, '(') //много скобок в один
-      .replace(/\)+/g, ')') //много скобок в один
-      .replace(/^[ |\-+]/g, '') //удаление дефисов и пробелов в начале
-      .replace(/[ |\-+]$/g, '') //удаление дефисов и пробелов в конце
-      .replace(/@+/g, '@') //много @ в один
-      .replace(/\.+/g, '.'); //много ... в один
-      */
-
   const customTrim = (val) =>
     val
       .replace(/([ \-()@_.!~*'])(?=[ \-()@_.!~*']*\1)/g, '')
