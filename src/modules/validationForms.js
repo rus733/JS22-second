@@ -8,6 +8,18 @@ const validationForms = () => {
   const inputNameBottom = document.querySelector('#form2-name');
   const inputMessageBottom = document.querySelector('#form2-message');
 
+  const customTrim = (val) =>
+    val
+      .replace(/\s+/g, ' ') //много пробелов в один
+      .replace(/-+/g, '-') //много дефисов в один
+      .replace(/\(+/g, '(') //много скобок в один
+      .replace(/\)+/g, ')') //много скобок в один
+      .replace(/^[ |\-+]/g, '') //удаление дефисов и пробелов в начале
+      .replace(/[ |\-+]$/g, '') //удаление дефисов и пробелов в конце
+      .replace(/@+/g, '@') //много @ в один
+      .replace(/\.+/g, '.'); //много ... в один
+
+  /*
   function customTrim(val) {
     val = val.replace(/\s+/g, ' '); //много пробелов в один
     val = val.replace(/-+/g, '-'); //много дефисов в один
@@ -20,6 +32,7 @@ const validationForms = () => {
 
     return val;
   }
+  */
   // валидация input-ов калькулятора
   inputsCalc.forEach((input) => {
     input.addEventListener('input', () => {
