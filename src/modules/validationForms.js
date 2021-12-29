@@ -17,7 +17,7 @@ const validationForms = () => {
       input.value = input.value.replace(/[^\d.]/g, '');
     });
   });
-  // валидация ввода имени
+  // валидация ввода имени верхней и нижней формы
 
   [...inputName, inputNameBottom].forEach((input) => {
     input.addEventListener('blur', (e) => {
@@ -33,28 +33,12 @@ const validationForms = () => {
     });
   });
 
-  /*
-  inputName.forEach((input) => {
-    input.addEventListener('blur', (e) => {
-      let val = e.target.value;
-      val = val.replace(/[^а-яё \-]/gi, '');
-      val = customTrim(val);
-      val = val.toLowerCase();
-      val = val.replace(/( |^|\-)[ а-яё]/g, (u) => u.toUpperCase());
-      e.target.value = val;
-    });
-    input.addEventListener('input', () => {
-      input.value = input.value.replace(/[^а-яё \-]/gi, '');
-    });
-  });
-*/
   //  валидация ввода почтового адреса
   inputEmail.forEach((input) => {
     input.addEventListener('blur', (e) => {
       let val = e.target.value;
       val = val.replace(/[^A-Za-z-@!.*~'_]/g, '');
       val = customTrim(val);
-      //e.target.value = '';
       e.target.value = val;
     });
     input.addEventListener('input', () => {
@@ -69,7 +53,6 @@ const validationForms = () => {
       let val = e.target.value;
       val = val.replace(/[^\d-)(]/g, '');
       val = customTrim(val);
-      //e.target.value = '';
       e.target.value = val;
     });
     input.addEventListener('input', () => {
@@ -77,27 +60,11 @@ const validationForms = () => {
     });
   });
 
-  /// валидация ввода имени нижней формы
-  /*
-  inputNameBottom.addEventListener('blur', (e) => {
-    let val = e.target.value;
-    val = val.replace(/[^а-яё \-]/gi, '');
-    val = customTrim(val);
-    //val = val.toLowerCase();
-    val = val.replace(/( |^)[ а-яё]/g, (u) => u.toUpperCase());
-    e.target.value = val;
-  });
-
-  inputNameBottom.addEventListener('input', () => {
-    inputNameBottom.value = inputNameBottom.value.replace(/[^а-яё \-]/gi, '');
-  });
-*/
   /// валидация ввода сообщения
   inputMessageBottom.addEventListener('blur', (e) => {
     let val = e.target.value;
     val = val.replace(/[^а-яё \-]/gi, '');
     val = customTrim(val);
-    //e.target.value = '';
     e.target.value = val;
   });
 
