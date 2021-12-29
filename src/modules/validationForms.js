@@ -8,7 +8,7 @@ const validationForms = () => {
   const inputNameBottom = document.querySelector('#form2-name');
   const inputMessageBottom = document.querySelector('#form2-message');
 
-  // const customTrim = (val) => val.replace(/([ \-()@_.!~*'])(?=[ \-()@_.!~*']*\1)/g, '');
+  //const customTrim = (val) => val.replace(/([ \-()@_.!~*'])(?=[ \-()@_.!~*']*\1)/g, '');
 
   /*
     val
@@ -22,18 +22,11 @@ const validationForms = () => {
       .replace(/\.+/g, '.'); //много ... в один
       */
 
-  function customTrim(val) {
-    val = val.replace(/\s+/g, ' '); //много пробелов в один
-    val = val.replace(/-+/g, '-'); //много дефисов в один
-    val = val.replace(/\(+/g, '('); //много скобок в один
-    val = val.replace(/\)+/g, ')'); //много скобок в один
-    val = val.replace(/^[ |\-+]/g, ''); //удаление дефисов и пробелов в начале
-    val = val.replace(/[ |\-+]$/g, ''); //удаление дефисов и пробелов в конце
-    val = val.replace(/@+/g, '@'); //много @ в один
-    val = val.replace(/\.+/g, '.'); //много ... в один
-
-    return val;
-  }
+  const customTrim = (val) =>
+    val
+      .replace(/([ \-()@_.!~*'])(?=[ \-()@_.!~*']*\1)/g, '')
+      .replace(/^[ |\-+]/g, '')
+      .replace(/[ |\-+]$/g, '');
 
   // валидация input-ов калькулятора
   inputsCalc.forEach((input) => {
@@ -59,13 +52,13 @@ const validationForms = () => {
   inputEmail.forEach((input) => {
     input.addEventListener('blur', (e) => {
       let val = e.target.value;
-      val = val.replace(/[^A-Za-z-@!.*~']/g, '');
+      val = val.replace(/[^A-Za-z-@!.*~'_]/g, '');
       val = customTrim(val);
       e.target.value = '';
       e.target.value = val;
     });
     input.addEventListener('input', () => {
-      input.value = input.value.replace(/[^A-Za-z-@!.*~']/g, '');
+      input.value = input.value.replace(/[^A-Za-z-@!.*~'_]/g, '');
     });
   });
 
