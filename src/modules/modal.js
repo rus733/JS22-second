@@ -1,7 +1,7 @@
 const modal = () => {
   const modal = document.querySelector('.popup');
   const buttons = document.querySelectorAll('.popup-btn');
-  const closeBtn = modal.querySelector('.popup-close');
+  //const closeBtn = modal.querySelector('.popup-close');
   // переменные для анимации
   let opacityValue = 0,
     step = 0.03,
