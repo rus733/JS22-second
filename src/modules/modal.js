@@ -33,10 +33,22 @@ const modal = () => {
     });
   });
   // закрываем модальное окно
+  /*
   closeBtn.addEventListener('click', () => {
     modal.style.display = 'none';
     opacityValue = 0;
     cancelAnimationFrame(animInterval);
+  });
+  */
+  //закрываем мод окно кликом мимо него
+  modal.addEventListener('click', (e) => {
+    //console.log(e.target.closest('.popup-content'));
+    if (!e.target.closest('.popup-content') || e.target.classList.contains('popup-close')) {
+      modal.style.display = 'none';
+      opacityValue = 0;
+      cancelAnimationFrame(animInterval);
+    }
+    //closest('.service-header-tab');
   });
 };
 
