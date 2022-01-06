@@ -2,6 +2,7 @@ const slider = () => {
   const sliderBlock = document.querySelector('.portfolio-content');
   const slides = document.querySelectorAll('.portfolio-item');
   const dots = document.querySelectorAll('.dot');
+  const timeInterval = 2000;
 
   let currentSlide = 0;
   let interval;
@@ -27,8 +28,8 @@ const slider = () => {
     nextSlide(dots, currentSlide, 'dot-active');
   };
 
-  const startSlide = () => {
-    interval = setInterval(autoSlide, 2000); // присвоим переменнной значение нашего интервала
+  const startSlide = (timer = 1500) => {
+    interval = setInterval(autoSlide, timer); // присвоим переменнной значение нашего интервала
   };
   // необходимо реализовать  вызов stopSlide при наведении курсора на стрелку или точку -кнопку
   // и при уведении курсора вызов startSlide
@@ -93,13 +94,13 @@ const slider = () => {
       //console.log(e.target);
       if (e.target.matches('.dot, .portfolio-btn')) {
         //console.log(e.target);
-        startSlide();
+        startSlide(timeInterval);
       }
     },
     true
   ); //добавим  true активируем всплытия, чтобы событие отрабатывало на дочерних элементах
 
-  startSlide();
+  startSlide(timeInterval);
 };
 
 export default slider;
