@@ -14,38 +14,33 @@ const menu = () => {
   };
 
   document.body.addEventListener('click', (e) => {
-    let target = e.target;
-    let itsMenu = target == menu || menu.contains(target);
-    let menuActive = menu.classList.contains('active-menu');
+    const target = e.target;
+    const targetClosestLink = target.closest('a[href*="#"]');
+    const itsMenu = target == menu || menu.contains(target);
+    const menuActive = menu.classList.contains('active-menu');
 
     if (target.closest('.menu')) {
       toggleMenu();
       return;
     }
 
-    if ((!itsMenu && menuActive) || target.closest('.close-btn')) {
+    if ((!itsMenu && menuActive) || target.closest('.close-btn') || (targetClosestLink && menu.contains(target))) {
       menu.classList.remove('active-menu');
       return;
     }
 
     //кнопка-ссылка в main к блоку услуг
-    if (target.closest('a[href*="#"]') && mainBlock.contains(target)) {
+    if (targetClosestLink && mainBlock.contains(target)) {
       e.preventDefault();
-      const blockId = target.closest('a[href*="#"]').getAttribute('href');
-      //scrollView(blockId);
-      document.querySelector(blockId).scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
-      toggleMenu();
+      const blockId = targetClosestLink.getAttribute('href');
+      scrollView(blockId);
     }
 
     //кнопки-ссылки в menu
-    if (target.closest('a[href*="#"]') && menu.contains(target)) {
+    if (targetClosestLink && menu.contains(target)) {
       e.preventDefault();
       const blockId = target.getAttribute('href');
       scrollView(blockId);
-      toggleMenu();
     }
   });
 };
