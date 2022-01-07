@@ -16,31 +16,22 @@ const menu = () => {
   document.body.addEventListener('click', (e) => {
     const target = e.target;
     const closestLink = target.closest('a[href*="#"]');
-    const itsMenu = target == menu || menu.contains(target);
-    const menuActive = menu.classList.contains('active-menu');
+    const closestMenu = target.closest('menu');
+    //const itsMenu = target == menu || menu.contains(target);
+    //const menuActive = menu.classList.contains('active-menu');
 
     if (target.closest('.menu') || target.closest('.close-btn')) {
       menu.classList.toggle('active-menu');
       return;
     }
+    // клик мимо меню или по ссылке
+    if (!closestMenu || closestLink) menu.classList.remove('active-menu');
 
-    if ((!itsMenu && menuActive) || (closestLink && menu.contains(target))) {
-      menu.classList.remove('active-menu');
-      return;
-    }
-
-    //кнопка-ссылка в main к блоку услуг
-    if (closestLink && mainBlock.contains(target)) {
+    //скрол кнопка-ссылка в main или кнопка-ссылка в меню
+    if (closestLink && (closestLink.closest('main') || closestMenu)) {
       e.preventDefault();
-      const blockId = closestLink.getAttribute('href');
-      scrollView(blockId);
-    }
-
-    //кнопки-ссылки в menu
-    if (closestLink && menu.contains(target)) {
-      e.preventDefault();
-      const blockId = target.getAttribute('href');
-      scrollView(blockId);
+      //const blockId = closestLink.getAttribute('href');
+      scrollView(closestLink.getAttribute('href'));
     }
   });
 };
