@@ -2,6 +2,7 @@ const slider = () => {
   const sliderBlock = document.querySelector('.portfolio-content');
   const slides = document.querySelectorAll('.portfolio-item');
   const dots = document.querySelectorAll('.dot');
+  let ulDots = document.querySelector('.portfolio-dots');
   const timeInterval = 2000;
 
   let currentSlide = 0;
@@ -99,8 +100,21 @@ const slider = () => {
     },
     true
   ); //добавим  true активируем всплытия, чтобы событие отрабатывало на дочерних элементах
+  // Добавляем точки для слайдера
+  const dotAdd = () => {
+    for (let i = 0; i < slides.length; i++) {
+      let dots = document.createElement('li');
+      dots.classList.add('dot');
+      ulDots.append(dots);
+    }
+    ulDots.children[0].classList.add('dot-active');
+  };
 
-  startSlide(timeInterval);
+  if (sliderBlock && slides && ulDots) {
+    dotAdd();
+    startSlide(timeInterval);
+  }
+  //startSlide(timeInterval);
 };
 
 export default slider;

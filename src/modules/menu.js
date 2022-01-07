@@ -1,40 +1,29 @@
 const menu = () => {
-  const menuBtn = document.querySelector('.menu');
   const menu = document.querySelector('menu');
-  const closeBtn = menu.querySelector('.close-btn');
-  const menuItem = menu.querySelectorAll('ul>li>a[href*="#"]');
-  const mainBlock = document.querySelector('main');
-  const mainLink = mainBlock.querySelector('a[href*="#"]');
-  const scrollScreen = (element) => {
-    const blockId = element.getAttribute('href');
-    document.querySelector('' + blockId).scrollIntoView({
+  const scrollView = (id) => {
+    document.querySelector(id).scrollIntoView({
       behavior: 'smooth',
       block: 'start',
     });
   };
-  // ф  закрытия меню
-  const handleMenu = () => {
-    menu.classList.toggle('active-menu');
-  };
 
-  //перебор элементов меню бургер
-  menuItem.forEach((item) => {
-    item.addEventListener('click', (e) => {
+  document.body.addEventListener('click', (e) => {
+    const target = e.target;
+    const closestLink = target.closest('a[href*="#"]');
+    const closestMenu = target.closest('menu');
+
+    if (target.closest('.menu') || target.closest('.close-btn')) {
+      menu.classList.toggle('active-menu');
+      return;
+    }
+    // клик мимо меню или по ссылке
+    if (!closestMenu || closestLink) menu.classList.remove('active-menu');
+
+    //скрол кнопка-ссылка в main или кнопка-ссылка в меню
+    if (closestLink && (closestLink.closest('main') || closestMenu)) {
       e.preventDefault();
-      scrollScreen(item);
-      handleMenu();
-    });
-  });
-
-  //кнопка меню
-  menuBtn.addEventListener('click', handleMenu);
-  //кнопка закрытия меню
-  closeBtn.addEventListener('click', handleMenu);
-  // кнопка прокрутки
-  mainLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    scrollScreen(mainLink);
+      scrollView(closestLink.getAttribute('href'));
+    }
   });
 };
-
 export default menu;
