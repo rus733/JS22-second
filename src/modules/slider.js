@@ -100,21 +100,8 @@ const slider = () => {
     },
     true
   ); //добавим  true активируем всплытия, чтобы событие отрабатывало на дочерних элементах
-  // Добавляем точки для слайдера
-  const dotAdd = () => {
-    for (let i = 0; i < slides.length; i++) {
-      let dots = document.createElement('li');
-      dots.classList.add('dot');
-      ulDots.append(dots);
-    }
-    ulDots.children[0].classList.add('dot-active');
-  };
 
-  if (sliderBlock && slides && ulDots) {
-    dotAdd();
-    startSlide(timeInterval);
-  }
-  //startSlide(timeInterval);
+  startSlide(timeInterval);
 };
 
 export default slider;
