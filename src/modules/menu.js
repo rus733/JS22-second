@@ -1,13 +1,13 @@
 const menu = () => {
   const menu = document.querySelector('menu');
-  const mainBlock = document.querySelector('main');
+  //const mainBlock = document.querySelector('main');
 
-  const toggleMenu = () => {
-    menu.classList.toggle('active-menu');
-  };
+  //const toggleMenu = () => {
+  //menu.classList.toggle('active-menu');
+  //};
 
-  const scrollView = (arg) => {
-    document.querySelector(arg).scrollIntoView({
+  const scrollView = (id) => {
+    document.querySelector(id).scrollIntoView({
       behavior: 'smooth',
       block: 'start',
     });
@@ -15,29 +15,29 @@ const menu = () => {
 
   document.body.addEventListener('click', (e) => {
     const target = e.target;
-    const targetClosestLink = target.closest('a[href*="#"]');
+    const closestLink = target.closest('a[href*="#"]');
     const itsMenu = target == menu || menu.contains(target);
     const menuActive = menu.classList.contains('active-menu');
 
-    if (target.closest('.menu')) {
-      toggleMenu();
+    if (target.closest('.menu') || target.closest('.close-btn')) {
+      menu.classList.toggle('active-menu');
       return;
     }
 
-    if ((!itsMenu && menuActive) || target.closest('.close-btn') || (targetClosestLink && menu.contains(target))) {
+    if ((!itsMenu && menuActive) || (closestLink && menu.contains(target))) {
       menu.classList.remove('active-menu');
       return;
     }
 
     //кнопка-ссылка в main к блоку услуг
-    if (targetClosestLink && mainBlock.contains(target)) {
+    if (closestLink && mainBlock.contains(target)) {
       e.preventDefault();
-      const blockId = targetClosestLink.getAttribute('href');
+      const blockId = closestLink.getAttribute('href');
       scrollView(blockId);
     }
 
     //кнопки-ссылки в menu
-    if (targetClosestLink && menu.contains(target)) {
+    if (closestLink && menu.contains(target)) {
       e.preventDefault();
       const blockId = target.getAttribute('href');
       scrollView(blockId);
