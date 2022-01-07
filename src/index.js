@@ -21,5 +21,5 @@ slider({
   dotsContentClass: 'portfolio-dots',
   dotClass: 'dot',
   dotActiveClass: 'dot-active',
-  timer: 3000,
+  timer: 2000,
 });

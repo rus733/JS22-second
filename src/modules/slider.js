@@ -1,106 +1,119 @@
-const slider = () => {
-  const sliderBlock = document.querySelector('.portfolio-content');
-  const slides = document.querySelectorAll('.portfolio-item');
-  const dots = document.querySelectorAll('.dot');
-  const timeInterval = 2000;
+const slider = ({
+  sliderContent,
+  sliderBtnsClass,
+  nextSlideBtn,
+  prevSlideBtn,
+  sliderItemClass,
+  dotsContentClass,
+  dotClass,
+  dotActiveClass = 'dot-active',
+  slideActiveClass = 'portfolio-item-active',
+  timer,
+}) => {
+  if (!sliderContent || !sliderItemClass) {
+    return;
+  }
+  const sliderBlock = document.querySelector(`.${sliderContent}`);
+  const sliders = document.querySelectorAll(`.${sliderItemClass}`);
+  const portfolioDots = document.querySelector(`.${dotsContentClass}`);
 
   let currentSlide = 0;
+  let dots;
   let interval;
 
-  const prevSlide = (elems, index, strClass) => {
-    elems[index].classList.remove(strClass);
+  const createDots = () => {
+    sliders.forEach(() => {
+      const dot = document.createElement('li');
+      dot.classList.add(dotClass);
+      portfolioDots.append(dot);
+    });
+    dots = document.querySelectorAll(`.${dotClass}`);
+    dots[currentSlide].classList.add(dotActiveClass);
   };
 
-  const nextSlide = (elems, index, strClass) => {
-    elems[index].classList.add(strClass);
+  const prevSlide = (elems, idx, className) => {
+    elems[idx].classList.remove(className);
+  };
+
+  const nextSlide = (elems, idx, className) => {
+    elems[idx].classList.add(className);
   };
 
   const autoSlide = () => {
-    prevSlide(slides, currentSlide, 'portfolio-item-active');
-    prevSlide(dots, currentSlide, 'dot-active');
+    prevSlide(sliders, currentSlide, slideActiveClass);
+    prevSlide(dots, currentSlide, dotActiveClass);
     currentSlide++;
-
-    if (currentSlide >= slides.length) {
+    if (currentSlide >= sliders.length) {
       currentSlide = 0;
     }
-
-    nextSlide(slides, currentSlide, 'portfolio-item-active');
-    nextSlide(dots, currentSlide, 'dot-active');
+    nextSlide(sliders, currentSlide, slideActiveClass);
+    nextSlide(dots, currentSlide, dotActiveClass);
   };
 
-  const startSlide = (timer = 1500) => {
-    interval = setInterval(autoSlide, timer); // присвоим переменнной значение нашего интервала
+  const startSlide = (timer = 2000) => {
+    interval = setInterval(autoSlide, timer);
   };
-  // необходимо реализовать  вызов stopSlide при наведении курсора на стрелку или точку -кнопку
-  // и при уведении курсора вызов startSlide
+
   const stopSlide = () => {
     clearInterval(interval);
   };
 
   sliderBlock.addEventListener('click', (e) => {
     e.preventDefault();
-    //ограничитель  обработчика по нужным классам
-    if (!e.target.matches('.dot, .portfolio-btn')) {
-      //console.log(1);
-      return; // если не по кнопкам вперед, назад , точки , программа завершается
+
+    if (!e.target.matches(`.${dotClass}, .${sliderBtnsClass}`)) {
+      return;
     }
 
-    prevSlide(slides, currentSlide, 'portfolio-item-active');
-    prevSlide(dots, currentSlide, 'dot-active');
+    prevSlide(sliders, currentSlide, slideActiveClass);
+    prevSlide(dots, currentSlide, dotActiveClass);
 
-    if (e.target.matches('#arrow-right')) {
+    if (e.target.matches(nextSlideBtn)) {
       currentSlide++;
-    } else if (e.target.matches('#arrow-left')) {
+    } else if (e.target.matches(prevSlideBtn)) {
       currentSlide--;
-    } else if (e.target.classList.contains('dot')) {
-      dots.forEach((dot, index) => {
+    } else if (e.target.classList.contains(dotClass)) {
+      dots.forEach((dot, idx) => {
         if (e.target === dot) {
-          currentSlide = index;
+          currentSlide = idx;
         }
       });
     }
 
-    if (currentSlide >= slides.length) {
+    if (currentSlide >= sliders.length) {
       currentSlide = 0;
     }
 
     if (currentSlide < 0) {
-      currentSlide = slides.length - 1;
+      currentSlide = sliders.length - 1;
     }
 
-    nextSlide(slides, currentSlide, 'portfolio-item-active');
-    nextSlide(dots, currentSlide, 'dot-active');
+    nextSlide(sliders, currentSlide, slideActiveClass);
+    nextSlide(dots, currentSlide, dotActiveClass);
   });
 
-  // напишем два обработчика  на sliderBlock для работы с интервалом
-  // когда наводим мышь  активируем stopSlide()
   sliderBlock.addEventListener(
     'mouseenter',
     (e) => {
-      //console.log(e.target); // выведем event.target до условия
-      if (e.target.matches('.dot, .portfolio-btn')) {
-        //console.log(e.target);
+      if (e.target.matches(`.${dotClass}, .${sliderBtnsClass}`)) {
         stopSlide();
       }
     },
     true
-  ); //добавим true активируем всплытия, чтобы событие отрабатывало на дочерних элементах
+  );
 
-  //
-  //когда уводим мышь активируем startSlide()
   sliderBlock.addEventListener(
     'mouseleave',
     (e) => {
-      //console.log(e.target);
-      if (e.target.matches('.dot, .portfolio-btn')) {
-        //console.log(e.target);
-        startSlide(timeInterval);
+      if (e.target.matches(`.${dotClass}, .${sliderBtnsClass}`)) {
+        startSlide(timer);
       }
     },
     true
-  ); //добавим  true активируем всплытия, чтобы событие отрабатывало на дочерних элементах
+  );
 
-  startSlide(timeInterval);
+  createDots();
+  startSlide(timer);
 };
 
 export default slider;
