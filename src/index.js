@@ -1,11 +1,10 @@
-'use strict';
-
 import timer from './modules/timer';
 import menu from './modules/menu';
 import modal from './modules/modal';
 import validationForms from './modules/validationForms';
 import tabs from './modules/tabs';
 import slider from './modules/slider';
+import calc from './modules/calc';
 timer('31 december 2022');
 menu();
 modal();
@@ -23,3 +22,4 @@ slider({
   dotActiveClass: 'dot-active',
   timer: 2000,
 });
+calc(100);

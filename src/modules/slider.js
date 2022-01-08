@@ -58,7 +58,7 @@ const slider = ({
     clearInterval(interval);
   };
 
-  sliderBlock.addEventListener('click', (e) => {
+  sliderBlock.addEventListener('click', e => {
     e.preventDefault();
 
     if (!e.target.matches(`.${dotClass}, .${sliderBtnsClass}`)) {
@@ -94,7 +94,7 @@ const slider = ({
 
   sliderBlock.addEventListener(
     'mouseenter',
-    (e) => {
+    e => {
       if (e.target.matches(`.${dotClass}, .${sliderBtnsClass}`)) {
         stopSlide();
       }
@@ -104,7 +104,7 @@ const slider = ({
 
   sliderBlock.addEventListener(
     'mouseleave',
-    (e) => {
+    e => {
       if (e.target.matches(`.${dotClass}, .${sliderBtnsClass}`)) {
         startSlide(timer);
       }
