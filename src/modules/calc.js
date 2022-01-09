@@ -44,13 +44,13 @@ const calc = (price = 100) => {
     }
   };
 
-  calcInputs.forEach(input => {
-    input.addEventListener('input', e => {
+  calcInputs.forEach((input) => {
+    input.addEventListener('input', (e) => {
       e.target.value = e.target.value.replace(/\D/gi, '');
     });
   });
 
-  calcBlock.addEventListener('change', e => {
+  calcBlock.addEventListener('change', (e) => {
     countCalc();
   });
 };

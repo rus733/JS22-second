@@ -11,7 +11,7 @@ const calc = (price = 100) => {
     const calcSquareValue = calcSquare.value;
 
     let totalValue = 0; // итого
-    let calcCountValue = 1; // количество помещений
+    const calcCountValue = 1; // количество помещений
 
     if (calcType.value && calcSquare.value && calcCount.value) {
       //console.log(price * calcTypeValue * calcSquareValue);
@@ -22,7 +22,7 @@ const calc = (price = 100) => {
     total.textContent = totalValue;
   };
 
-  calcBlock.addEventListener('input', e => {
+  calcBlock.addEventListener('input', (e) => {
     //console.log(e.target);
     if (e.target === calcType || e.target === calcSquare || e.target === calcCount || e.target === calcDay) {
       countCalc();
