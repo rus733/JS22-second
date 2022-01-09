@@ -50,7 +50,7 @@ const calc = (price = 100) => {
     });
   });
 
-  calcBlock.addEventListener('change', () => {
+  calcBlock.addEventListener('input', () => {
     countCalc();
   });
 };
