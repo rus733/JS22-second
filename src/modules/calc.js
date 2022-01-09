@@ -1,4 +1,4 @@
-import { animate } from './helper.js';
+import { animate } from './helpers.js';
 const calc = (price = 100) => {
   const calcBlock = document.querySelector('.calc-block');
   const calcType = document.querySelector('.calc-type');

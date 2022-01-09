@@ -1,44 +1,62 @@
-import { animate } from './helper.js';
+import { animate } from './helpers.js';
 
 const modal = () => {
+  const popupBtns = document.querySelectorAll('.popup-btn');
   const modal = document.querySelector('.popup');
-  const buttons = document.querySelectorAll('.popup-btn');
-  // переменные для анимации
-  let opacityValue = 0,
-    step = 0.03,
-    animInterval = 0;
 
-  // анимация
-  function animModalWindow() {
-    opacityValue += step;
+  const animateModal = () => {
+    modal.style.transform = 'scale(0)';
+    modal.style.transition = 'all 0.3s ease-in-out';
+    modal.style.opacity = '0';
 
-    if (opacityValue >= 1) {
-      opacityValue = 1;
-      cancelAnimationFrame(animInterval);
+    if (modal.style.display !== 'block') {
+      modal.style.display = 'block';
+      animate({
+        duration: 100,
+        timing(timeFraction) {
+          return timeFraction;
+        },
+        draw(progress) {
+          modal.style.opacity = `${progress}`;
+          modal.style.transform = `scale(${progress})`;
+        },
+      });
+    } else {
+      animate({
+        duration: 100,
+        timing(timeFraction) {
+          return timeFraction;
+        },
+        draw() {
+          modal.style.transform = 'scale(0)';
+          modal.style.opacity = '0';
+          setTimeout(() => {
+            modal.style.display = 'none';
+          }, 200);
+        },
+      });
     }
-    modal.style.opacity = opacityValue;
-    animInterval = requestAnimationFrame(animModalWindow);
-  }
+  };
 
-  // открываем модальное окно
-  buttons.forEach((btn) => {
+  popupBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-      // проверка размера экрана
-      if (window.screen.width < 768) {
-        modal.style.display = 'block';
+      if (document.documentElement.clientWidth > 768) {
+        animateModal();
       } else {
+        modal.style.transform = 'scale(1)';
+        modal.style.opacity = '1';
         modal.style.display = 'block';
-        modal.style.opacity = '0';
-        animInterval = requestAnimationFrame(animModalWindow);
       }
     });
   });
-  // закрываем модальное окно
+
   modal.addEventListener('click', (e) => {
     if (!e.target.closest('.popup-content') || e.target.classList.contains('popup-close')) {
-      modal.style.display = 'none';
-      opacityValue = 0;
-      cancelAnimationFrame(animInterval);
+      if (document.documentElement.clientWidth > 768) {
+        animateModal();
+      } else {
+        modal.style.display = 'none';
+      }
     }
   });
 };
