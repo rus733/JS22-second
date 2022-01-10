@@ -4,12 +4,6 @@ const modal = () => {
   const popupBtns = document.querySelectorAll('.popup-btn');
   const modal = document.querySelector('.popup');
   const content = modal.querySelector('.popup-content');
-
-  console.dir(popupBtns);
-  console.dir(modal);
-  console.dir(modal.style);
-  console.log(content);
-
   const animateModal = () => {
     const isOpen = modal.style.display === 'block';
     animate({
