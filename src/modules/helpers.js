@@ -1,9 +1,9 @@
 const animate = ({ timing, draw, duration }) => {
-  const start = performance.now();
+  const start = performance.now(); //фиксируем точку времени на данный момент. старт анимации
 
   requestAnimationFrame(function animate(time) {
     // timeFraction изменяется от 0 до 1
-    let timeFraction = (time - start) / duration;
+    let timeFraction = (time - start) / duration; // duration -длительности анимации,time- текущее время
     if (timeFraction > 1) {
       timeFraction = 1;
     }
