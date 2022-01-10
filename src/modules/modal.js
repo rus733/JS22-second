@@ -3,40 +3,26 @@ import { animate } from './helpers.js';
 const modal = () => {
   const popupBtns = document.querySelectorAll('.popup-btn');
   const modal = document.querySelector('.popup');
+  const content = modal.querySelector('.popup-content');
 
   const animateModal = () => {
-    modal.style.transform = 'scale(0)';
-    modal.style.transition = 'all 0.3s ease-in-out';
-    modal.style.opacity = '0';
+    const isOpen = modal.style.display === 'block';
 
-    if (modal.style.display !== 'block') {
-      modal.style.display = 'block';
-      animate({
-        duration: 100,
-        timing(timeFraction) {
-          return timeFraction;
-        },
-        draw(progress) {
-          modal.style.opacity = `${progress}`;
-          modal.style.transform = `scale(${progress})`;
-        },
-      });
-    } else {
-      animate({
-        duration: 100,
-        timing(timeFraction) {
-          return timeFraction;
-        },
-        draw() {
-          modal.style.transform = 'scale(0)';
-          modal.style.opacity = '0';
-          setTimeout(() => {
-            modal.style.display = 'none';
-          }, 200);
-        },
-      });
-    }
+    animate({
+      duration: 500,
+      timing(timeFraction) {
+        return isOpen ? 1 - timeFraction : timeFraction;
+      },
+      draw(progress) {
+        progress > 0.5 ? (modal.style.display = 'block') : (modal.style.display = 'none');
+        if (progress * 2 < 1) modal.style.opacity = `${progress * 2}`;
+        if (progress * 2 > 1) content.style.transform = `scale(${progress * 2 - 1})`;
+      },
+    });
   };
+
+  content.style.transform = 'scale(0)';
+  modal.style.opacity = '0';
 
   popupBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
