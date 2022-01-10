@@ -3,11 +3,11 @@ const modal = () => {
   const buttons = document.querySelectorAll('.popup-btn');
   // переменные для анимации
   let opacityValue = 0,
-    step = 0.03,
-    animInterval = 0;
+      animInterval = 0;
+  const step = 0.03,
 
   // анимация
-  function animModalWindow() {
+  function animModalWindow() { // ругается eslint  
     opacityValue += step;
 
     if (opacityValue >= 1) {
