@@ -1,5 +1,10 @@
 const sendForm = ({ formId, someElem = [] }) => {
   const form = document.getElementById(formId);
+  // coplflbv новый блок  и неск вариантов текста извещений  при отправке данных
+  const statusBlock = document.createElement('div');
+  const loadText = 'Загрузка ...';
+  const errorText = 'Ошибка ...';
+  const successText = 'Спасибо! Наш менеджер с вами свяжется'; // идем в обработчик события submit
 
   const validate = (list) => {
     // при каждом submit , проверим наличие класса .success на наших input-ах ,
@@ -34,6 +39,9 @@ const sendForm = ({ formId, someElem = [] }) => {
     // соберем данные из new FormData(form)
     // создадим пустой обьект и заполним его forEach
     const formBody = {};
+
+    statusBlock.textContent = loadText;
+    form.append(statusBlock); // блок появится в конце  form  при отправке
     formData.forEach((val, key) => {
       formBody[key] = val;
     });
@@ -56,14 +64,21 @@ const sendForm = ({ formId, someElem = [] }) => {
     //console.log(form.querySelectorAll('input')); // найдем внутри формы все элементы инпут и передадим в validate();
 
     if (validate(formElements)) {
-      sendData(formBody).then((data) => {
-        // и отправляем formBody
-        //console.log(data);
-        formElements.forEach((input) => {
-          //добавим очистку полей input после отправки
-          input.value = '';
+      sendData(formBody)
+        .then((data) => {
+          // и отправляем formBody
+          //console.log(data);
+          statusBlock.textContent = successText; // при успешной загрузке сменим текст
+
+          formElements.forEach((input) => {
+            //добавим очистку полей input после отправки
+            input.value = '';
+          });
+        })
+        .catch((error) => {
+          // добавим обработку ошибки методом catch
+          statusBlock.textContent = errorText;
         });
-      });
     } else {
       alert('Данные не валидны !!!');
     }
