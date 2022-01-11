@@ -29,9 +29,55 @@ sendForm({
   formId: 'form1',
   someElem: [
     {
-      type: 'block', //может быть  и span, и блок , можно обращаться уже свойству текстКонтент, может и  input,
-      // усли input , то можно получать value - ниже
-      id: 'total', //id - результат калькулятора
+      type: 'block',
+      id: 'total',
     },
   ],
 });
+sendForm({
+  formId: 'form2',
+  someElem: [
+    {
+      type: 'block',
+      id: 'total',
+    },
+  ],
+});
+sendForm({
+  formId: 'form3',
+  someElem: [
+    {
+      type: 'block',
+      id: 'total',
+    },
+  ],
+});
+/*
+sendForm({
+  formId: 'form1',
+  someElem: [
+    {
+      type: 'block',
+      id: 'total',
+    },
+  ],
+});
+sendForm({
+  formId: 'form2',
+  someElem: [
+    {
+      type: 'block',
+      id: 'total',
+    },
+  ],
+});
+sendForm({
+  formId: 'form3',
+  someElem: [
+    {
+      type: 'block',
+      id: 'total',
+    },
+  ],
+});
+*/
