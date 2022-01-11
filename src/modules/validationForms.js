@@ -56,7 +56,7 @@ const validationForms = () => {
       e.target.value = val;
     });
     input.addEventListener('input', () => {
-      input.value = input.value.replace(/[^+\d-)(]/g, '');
+      input.value = input.value.replace(/[^\d-)(]/g, '');
     });
   });
 

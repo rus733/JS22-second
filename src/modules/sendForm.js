@@ -23,8 +23,9 @@ const sendForm = ({ formId, someElem = [] }) => {
           setInvalid(item);
         }
       } else if (item.classList.contains('form-phone')) {
-        if (!item.value.match(/^((8|\+7)[- ]?)?(\(?\d{3}\)?[- ]?)?[\d\- ]{6,}$/gi)) {
+        if (!item.value.match(/^(\+7|7|8)[\s(]?(\d{3})[\s)]?(\d{3})[\s-]?(\d{2})[\s-]?(\d{2})/gi)) {
           setInvalid(item);
+          //
         }
       } else if (item.classList.contains('form-name') || item.classList.contains('top-form')) {
         if (!item.value.match(/^[а-яА-Я][а-яА-Я- ]+[а-яА-Я]?$/g)) {
@@ -53,7 +54,7 @@ const sendForm = ({ formId, someElem = [] }) => {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {
-        'Content-Type': 'aplication/json',
+        'Content-Type': 'application/json',
       },
     });
     return await res.json();
