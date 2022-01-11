@@ -8,31 +8,40 @@ const sendForm = ({ formId, someElem = [] }) => {
 
   const validate = (list) => {
     let success = true;
+    const checkItem = (event) => validate([event.target]);
+    const setInvalid = (item) => {
+      success = false;
+      item.style.backgroundColor = 'lightcoral';
+      item.addEventListener('input', checkItem);
+    };
 
     list.forEach((item) => {
+      item.style.backgroundColor = 'lightgreen';
+      item.removeEventListener('input', checkItem);
       if (item.classList.contains('form-email')) {
         if (!item.value.match(/.+@.+\..+/gi)) {
-          success = false;
+          setInvalid(item);
         }
       } else if (item.classList.contains('form-phone')) {
         if (!item.value.match(/^((8|\+7)[- ]?)?(\(?\d{3}\)?[- ]?)?[\d\- ]{6,}$/gi)) {
-          success = false;
+          setInvalid(item);
         }
       } else if (item.classList.contains('form-name') || item.classList.contains('top-form')) {
         if (!item.value.match(/^[а-яА-Я][а-яА-Я- ]+[а-яА-Я]?$/g)) {
-          success = false;
+          setInvalid(item);
         }
       } else if (item.classList.contains('mess')) {
         if (item.value.match(/[a-zA-Z'][a-zA-Z']+[a-zA-Z']?$/gi)) {
-          success = false;
+          setInvalid(item);
         }
       } else if (item.value === '') {
-        success = false;
+        setInvalid(item);
       }
     });
 
     return success;
   };
+
   function unBlockBody() {
     const body = document.body;
     body.style.overflow = 'auto';
@@ -96,6 +105,7 @@ const sendForm = ({ formId, someElem = [] }) => {
 
           formElements.forEach((input) => {
             input.value = '';
+            input.style.backgroundColor = '';
           });
 
           setTimeout(() => {
@@ -118,15 +128,24 @@ const sendForm = ({ formId, someElem = [] }) => {
             form.removeChild(statusBlock);
           }, 5000);
         });
-    } else {
-      alert('Данные не валидны!');
     }
+    //else {
+    //alert('Данные не валидны!');
+    // }
   };
 
   try {
     if (!form) {
       throw new Error('Верните форму на место, пожалуйста!');
     }
+    form.addEventListener(
+      'invalid',
+      (event) => {
+        event.preventDefault();
+        validate([event.target]);
+      },
+      true
+    );
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       submitForm();
