@@ -15,7 +15,7 @@ const sendForm = ({ formId, someElem = [] }) => {
           success = false;
         }
       } else if (item.classList.contains('form-phone')) {
-        if (!item.value.match(/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{6,}$/gi)) {
+        if (!item.value.match(/^((8|\+7)[- ]?)?(\(?\d{3}\)?[- ]?)?[\d\- ]{6,}$/gi)) {
           success = false;
         }
       } else if (item.classList.contains('form-name') || item.classList.contains('top-form')) {
@@ -108,7 +108,7 @@ const sendForm = ({ formId, someElem = [] }) => {
             unBlockBody();
           }, 4000);
         })
-        .catch((err) => {
+        .catch((error) => {
           form.removeChild(preload);
           form.append(errorForm);
           statusBlock.textContent = errorText;
