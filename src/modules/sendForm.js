@@ -82,10 +82,22 @@ const sendForm = ({ formId, someElem = [] }) => {
     }
   };
 
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    submitForm();
-  });
+  // добавим на случайесли передали при импорте не тот id
+  //или  верстальщик случайно уберет атрибут(name??)
+  // иливообще весь элемент то , чтобы код не сломался
+  //используем try catch
+  try {
+    if (!form) {
+      throw new Error('Верните форму на место , пожалуйста!!!');
+    }
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      submitForm();
+    });
+  } catch (error) {
+    console.log(error.message); //
+  }
 };
 
 export default sendForm;
