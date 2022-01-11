@@ -5,13 +5,14 @@ import validationForms from './modules/validationForms';
 import tabs from './modules/tabs';
 import slider from './modules/slider';
 import calc from './modules/calc';
+import sendForm from './modules/sendForm';
 timer('11 january 2022');
 menu();
 modal();
 validationForms();
 tabs();
 calc(100);
-sendForm;
+
 slider({
   sliderContent: 'portfolio-content',
   sliderItemClass: 'portfolio-item',
@@ -24,3 +25,4 @@ slider({
   dotActiveClass: 'dot-active',
   timer: 2000,
 });
+sendForm('form1');
