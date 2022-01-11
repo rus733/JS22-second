@@ -8,11 +8,7 @@ const sendForm = ({ formId, someElem = [] }) => {
     // не произойдет sendData(formBody).then((data) =>
     let success = true; // создадим переменную
     //console.log('validate', list);
-    list.forEach((input) => {
-      if (!input.classList.contains('success')) {
-        success = false;
-      }
-    });
+
     return success; // и возвращаем значение success
   };
 
@@ -62,7 +58,11 @@ const sendForm = ({ formId, someElem = [] }) => {
     if (validate(formElements)) {
       sendData(formBody).then((data) => {
         // и отправляем formBody
-        console.log(data);
+        //console.log(data);
+        formElements.forEach((input) => {
+          //добавим очистку полей input после отправки
+          input.value = '';
+        });
       });
     } else {
       alert('Данные не валидны !!!');
