@@ -11,6 +11,7 @@ modal();
 validationForms();
 tabs();
 calc(100);
+sendForm;
 slider({
   sliderContent: 'portfolio-content',
   sliderItemClass: 'portfolio-item',
