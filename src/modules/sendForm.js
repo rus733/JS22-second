@@ -29,9 +29,7 @@ const sendForm = ({ formId, someElem = [] }) => {
       },
     }).then((res) => res.json());
 
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-
+  const submitForm = () => {
     const formElements = form.querySelectorAll('input'); // передадим в ф. validate  полученный  nodeList
     const formData = new FormData(form); // собирает данные со всех элементов формы
     //но только у тех у кого есть аттрибут name="user_form"
@@ -82,6 +80,11 @@ const sendForm = ({ formId, someElem = [] }) => {
     } else {
       alert('Данные не валидны !!!');
     }
+  };
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    submitForm();
   });
 };
 
