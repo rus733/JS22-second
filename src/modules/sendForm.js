@@ -1,6 +1,21 @@
 const sendForm = ({ formId, someElem = [] }) => {
   const form = document.getElementById(formId);
 
+  const validate = (list) => {
+    // при каждом submit , проверим наличие класса .success на наших input-ах ,
+    //если  хотябы на одном не будет этого класса ,
+    // то validate вернет false  и отправка
+    // не произойдет sendData(formBody).then((data) =>
+    let success = true; // создадим переменную
+    //console.log('validate', list);
+    list.forEach((input) => {
+      if (!input.classList.contains('success')) {
+        success = false;
+      }
+    });
+    return success; // и возвращаем значение success
+  };
+
   const sendData = (data) =>
     fetch('https://jsonplaceholder.typicode.com/posts', {
       method: 'POST',
@@ -16,6 +31,7 @@ const sendForm = ({ formId, someElem = [] }) => {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
 
+    const formElements = form.querySelectorAll('input'); // передадим в ф. validate  полученный  nodeList
     const formData = new FormData(form); // собирает данные со всех элементов формы
     //но только у тех у кого есть аттрибут name="user_form"
 
@@ -40,11 +56,17 @@ const sendForm = ({ formId, someElem = [] }) => {
       }
     });
     console.log('submit');
+    // нужно сделать проверку  правильности заполнения форм перед отправкой
+    //console.log(form.querySelectorAll('input')); // найдем внутри формы все элементы инпут и передадим в validate();
 
-    sendData(formBody).then((data) => {
-      // и отправляем formBody
-      console.log(data);
-    });
+    if (validate(formElements)) {
+      sendData(formBody).then((data) => {
+        // и отправляем formBody
+        console.log(data);
+      });
+    } else {
+      alert('Данные не валидны !!!');
+    }
   });
 };
 
