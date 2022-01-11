@@ -1,11 +1,5 @@
-const sendForm = (idForm) => {
-  const form = document.getElementById(idForm);
-
-  // создадим не пустой обьект
-  const user = {
-    name: ' Álex',
-    age: 24,
-  };
+const sendForm = ({ formId, someElem = [] }) => {
+  const form = document.getElementById(formId);
 
   const sendData = (data) =>
     fetch('https://jsonplaceholder.typicode.com/posts', {
@@ -31,8 +25,21 @@ const sendForm = (idForm) => {
     formData.forEach((val, key) => {
       formBody[key] = val;
     });
-
-    //console.log('submit');
+    // можем делать перебор второго импортируемого аргумента someElem =[]
+    someElem.forEach((elem) => {
+      console.log(elem); //увидим содержание переданного аргументом someElem
+      // можем получит элемент по идентификатору и вытащить его текст содержимое если его тип блок или span
+      // или value если тип input
+      // получим этот элемент
+      const elemetn = document.getElementById(elem.id);
+      console.log(elemetn);
+      if (elem.type === 'block') {
+        formBody[elem.id] = elemetn.textContent;
+      } else if (elem.type === 'input') {
+        formBody[elem.id] = elemetn.value;
+      }
+    });
+    console.log('submit');
 
     sendData(formBody).then((data) => {
       // и отправляем formBody
