@@ -6,9 +6,11 @@ const sendForm = ({ formId, someElem = [] }) => {
   const errorText = 'Ошибка...';
   const successText = 'Спасибо, наш менеджер с вами свяжется';
 
+  let checkItem;
+
   const validate = (list) => {
     let success = true;
-    const checkItem = (event) => validate([event.target]);
+    if (!checkItem) checkItem = (event) => validate([event.target]);
     const setInvalid = (item) => {
       success = false;
       item.style.backgroundColor = 'lightcoral';

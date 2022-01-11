@@ -51,12 +51,12 @@ const validationForms = () => {
   inputPhone.forEach((input) => {
     input.addEventListener('blur', (e) => {
       let val = e.target.value;
-      val = val.replace(/[^0-9()-+]/, '');
+      val = val.replace(/[^0-9()\-+]/, '');
       val = customTrim(val);
       e.target.value = val;
     });
     input.addEventListener('input', () => {
-      input.value = input.value.replace(/[^0-9()-+]/, '');
+      input.value = input.value.replace(/[^0-9()\-+]/, '');
     });
   });
 
