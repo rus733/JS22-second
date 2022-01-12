@@ -8,7 +8,8 @@ const validationForms = () => {
   const customTrim = (val) =>
     val
       .replace(/([ \-()@_.!~*'])(?=[ \-()@_.!~*']*\1)/g, '')
-      .replace(/^[ |\-+]/g, '')
+      //.replace(/^[ |\-+]/g, '')
+      .replace(/^[ |-]/g, '')
       .replace(/[ |\-+]$/g, '');
 
   // валидация input-ов калькулятора
