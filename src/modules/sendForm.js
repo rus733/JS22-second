@@ -1,6 +1,8 @@
 import { preload, done, errorForm } from './helpers';
 const sendForm = ({ formId, someElem = [] }) => {
-  const form = document.getElementById(formId);
+  const form = document.getElementById(formId); //form-email
+  //console.log(form.querySelectorAll('.form-email')[0]);
+  //form.querySelectorAll('.form-email')[0].setAttribute('required', //'enabled');
   const statusBlock = document.createElement('div');
   const loadText = 'Загрузка...';
   const errorText = 'Ошибка...';
@@ -20,6 +22,7 @@ const sendForm = ({ formId, someElem = [] }) => {
     list.forEach((item) => {
       item.style.backgroundColor = 'lightgreen';
       item.removeEventListener('input', checkItem);
+
       if (item.classList.contains('form-email')) {
         if (!item.value.match(/.+@.+\..+/gi)) {
           setInvalid(item);
@@ -64,6 +67,7 @@ const sendForm = ({ formId, someElem = [] }) => {
 
   const submitForm = () => {
     const formElements = form.querySelectorAll('input');
+    console.log(formElements);
     const formData = new FormData(form);
     const formBody = {};
 
@@ -92,6 +96,7 @@ const sendForm = ({ formId, someElem = [] }) => {
 
     someElem.forEach((elem) => {
       const element = document.getElementById(elem.id);
+
       if (elem.type === 'block') {
         formBody[elem.id] = element.textContent;
       } else if (elem.type === 'input') {

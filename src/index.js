@@ -6,7 +6,7 @@ import tabs from './modules/tabs';
 import slider from './modules/slider';
 import calc from './modules/calc';
 import sendForm from './modules/sendForm';
-timer('11 january 2022');
+timer('14 january 2022');
 menu();
 modal();
 validationForms();
