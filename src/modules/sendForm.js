@@ -6,9 +6,6 @@ const sendForm = ({ formId, someElem = [] }) => {
   const errorText = 'Ошибка...';
   const successText = 'Спасибо, наш менеджер с вами свяжется';
 
-  const calcInputs = document.querySelectorAll('.calc-block > input');
-  const total = document.querySelector('#total');
-
   let checkItem;
 
   const validate = (list) => {
@@ -118,12 +115,6 @@ const sendForm = ({ formId, someElem = [] }) => {
           formElements.forEach((input) => {
             input.value = '';
             input.style.backgroundColor = '';
-          });
-
-          //сброс калькулятора
-          calcInputs.forEach((input) => {
-            input.value = '';
-            total.textContent = '';
           });
 
           setTimeout(() => {
