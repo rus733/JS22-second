@@ -1,5 +1,4 @@
 import { preload, done, errorForm } from './helpers';
-
 const sendForm = ({ formId, someElem = [] }) => {
   const form = document.getElementById(formId);
   const statusBlock = document.createElement('div');
@@ -68,10 +67,6 @@ const sendForm = ({ formId, someElem = [] }) => {
     const formElements = form.querySelectorAll('input');
     const formData = new FormData(form);
     const formBody = {};
-
-    //console.log('form = ', form);
-    //console.log('formElements = ', formElements);
-    //console.log('formData = ', formData);
 
     statusBlock.textContent = loadText;
     statusBlock.style.color = 'white';
