@@ -1,12 +1,13 @@
 import { preload, done, errorForm } from './helpers';
 const sendForm = ({ formId, someElem = [] }) => {
-  const form = document.getElementById(formId); //form-email
-  //console.log(form.querySelectorAll('.form-email')[0]);
-  //form.querySelectorAll('.form-email')[0].setAttribute('required', //'enabled');
+  const form = document.getElementById(formId);
   const statusBlock = document.createElement('div');
   const loadText = 'Загрузка...';
   const errorText = 'Ошибка...';
   const successText = 'Спасибо, наш менеджер с вами свяжется';
+
+  const calcInputs = document.querySelectorAll('.calc-block > input');
+  const total = document.querySelector('#total');
 
   let checkItem;
 
@@ -67,7 +68,6 @@ const sendForm = ({ formId, someElem = [] }) => {
 
   const submitForm = () => {
     const formElements = form.querySelectorAll('input');
-    console.log(formElements);
     const formData = new FormData(form);
     const formBody = {};
 
@@ -98,9 +98,13 @@ const sendForm = ({ formId, someElem = [] }) => {
       const element = document.getElementById(elem.id);
 
       if (elem.type === 'block') {
-        formBody[elem.id] = element.textContent;
+        if (element.textContent && element.textContent !== '0') {
+          formBody[elem.id] = element.textContent;
+        }
       } else if (elem.type === 'input') {
-        formBody[elem.id] = element.value;
+        if (element.value !== '0' && element.value !== '') {
+          formBody[elem.id] = element.value;
+        }
       }
     });
 
@@ -116,10 +120,17 @@ const sendForm = ({ formId, someElem = [] }) => {
             input.style.backgroundColor = '';
           });
 
+          //сброс калькулятора
+          calcInputs.forEach((input) => {
+            input.value = '';
+            total.textContent = '';
+          });
+
           setTimeout(() => {
             form.removeChild(done);
             form.removeChild(statusBlock);
           }, 5000);
+
           const modal = document.querySelector('.popup');
           setTimeout(() => {
             modal.style.display = 'none';
