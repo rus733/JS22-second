@@ -22,14 +22,14 @@ const validationForms = () => {
   [...inputName, inputNameBottom].forEach((input) => {
     input.addEventListener('blur', (e) => {
       let val = e.target.value;
-      val = val.replace(/[^а-яё \-]/gi, '');
+      val = val.replace(/[^а-яё -]/gi, '');
       val = customTrim(val);
       val = val.toLowerCase();
-      val = val.replace(/( |^|\-)[ а-яё]/g, (u) => u.toUpperCase());
+      val = val.replace(/( |^|-)[ а-яё]/g, (u) => u.toUpperCase());
       e.target.value = val;
     });
     input.addEventListener('input', () => {
-      input.value = input.value.replace(/[^а-яё \-]/gi, '');
+      input.value = input.value.replace(/[^а-яё -]/gi, '');
     });
   });
 
@@ -51,25 +51,25 @@ const validationForms = () => {
   inputPhone.forEach((input) => {
     input.addEventListener('blur', (e) => {
       let val = e.target.value;
-      val = val.replace(/[^\d-)(]/g, '');
+      val = val.replace(/[^0-9()\-+]/, '');
       val = customTrim(val);
       e.target.value = val;
     });
     input.addEventListener('input', () => {
-      input.value = input.value.replace(/[^\d-)(]/g, '');
+      input.value = input.value.replace(/[^0-9()\-+]/, '');
     });
   });
 
   /// валидация ввода сообщения
   inputMessageBottom.addEventListener('blur', (e) => {
     let val = e.target.value;
-    val = val.replace(/[^а-яё \-]/gi, '');
+    val = val.replace(/[^а-яё -]/gi, '');
     val = customTrim(val);
     e.target.value = val;
   });
 
   inputMessageBottom.addEventListener('input', () => {
-    inputMessageBottom.value = inputMessageBottom.value.replace(/[^а-яё \-]/gi, '');
+    inputMessageBottom.value = inputMessageBottom.value.replace(/[^а-яё -]/gi, '');
   });
 };
 

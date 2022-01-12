@@ -5,8 +5,8 @@ import validationForms from './modules/validationForms';
 import tabs from './modules/tabs';
 import slider from './modules/slider';
 import calc from './modules/calc';
-
-timer('11 january 2022');
+import sendForm from './modules/sendForm';
+timer('14 january 2022');
 menu();
 modal();
 validationForms();
@@ -24,3 +24,59 @@ slider({
   dotActiveClass: 'dot-active',
   timer: 2000,
 });
+sendForm({
+  formId: 'form1',
+  someElem: [
+    {
+      type: 'block',
+      id: 'total',
+    },
+  ],
+});
+sendForm({
+  formId: 'form2',
+  someElem: [
+    {
+      type: 'block',
+      id: 'total',
+    },
+  ],
+});
+sendForm({
+  formId: 'form3',
+  someElem: [
+    {
+      type: 'block',
+      id: 'total',
+    },
+  ],
+});
+/*
+sendForm({
+  formId: 'form1',
+  someElem: [
+    {
+      type: 'block',
+      id: 'total',
+    },
+  ],
+});
+sendForm({
+  formId: 'form2',
+  someElem: [
+    {
+      type: 'block',
+      id: 'total',
+    },
+  ],
+});
+sendForm({
+  formId: 'form3',
+  someElem: [
+    {
+      type: 'block',
+      id: 'total',
+    },
+  ],
+});
+*/
