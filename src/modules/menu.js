@@ -1,5 +1,6 @@
 const menu = () => {
   const menu = document.querySelector('menu');
+
   const scrollView = (id) => {
     document.querySelector(id).scrollIntoView({
       behavior: 'smooth',
