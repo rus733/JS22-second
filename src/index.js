@@ -6,12 +6,14 @@ import tabs from './modules/tabs';
 import slider from './modules/slider';
 import calc from './modules/calc';
 import sendForm from './modules/sendForm';
+import swiper from './modules/swiper';
 timer('14 january 2022');
 menu();
 modal();
 validationForms();
 tabs();
 calc(100);
+swiper();
 slider({
   sliderContent: 'portfolio-content',
   sliderItemClass: 'portfolio-item',

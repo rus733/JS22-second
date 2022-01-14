@@ -21,6 +21,7 @@
     "webpack-dev-server": "^4.7.0"
   },
   "dependencies": {
-    "eslint": "^8.6.0"
+    "eslint": "^8.6.0",
+    "swiper": "^7.4.1"
   }
 }
